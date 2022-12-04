@@ -1,14 +1,17 @@
-use std::{io::{BufReader, BufRead}, fs::File};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
 fn common_all_rugsacks(group: Vec<String>) -> char {
     for c0 in group[0].chars() {
-        for c1 in group[1].chars(){
+        for c1 in group[1].chars() {
             if c0 == c1 {
-                for c2 in group[2].chars(){
+                for c2 in group[2].chars() {
                     if c1 == c2 {
                         return c0;
                     }
-                 }
+                }
             }
         }
     }
@@ -23,11 +26,11 @@ fn get_char_priority(c: char) -> u32 {
     }
 }
 
-pub fn run(){
+pub fn run() {
     let file = File::open("data/input.txt").unwrap();
     let reader = BufReader::new(file);
 
-    let mut group =  Vec::<String>::new();
+    let mut group = Vec::<String>::new();
     let mut all_groups = Vec::<Vec<String>>::new();
 
     let mut count = 0;
@@ -42,6 +45,9 @@ pub fn run(){
         }
     }
 
-    let total = all_groups.into_iter().map(|group| get_char_priority(common_all_rugsacks(group))).reduce(|p1,p2| p1+p2);
+    let total = all_groups
+        .into_iter()
+        .map(|group| get_char_priority(common_all_rugsacks(group)))
+        .reduce(|p1, p2| p1 + p2);
     println!("Result P2: {}", total.unwrap());
 }

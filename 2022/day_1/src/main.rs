@@ -1,6 +1,9 @@
-use std::{io::{BufReader, BufRead}, fs::File};
+use std::{
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
-fn part_1(){
+fn part_1() {
     let file = File::open("data/input.txt").unwrap();
     let reader = BufReader::new(file);
 
@@ -22,7 +25,7 @@ fn part_1(){
     println!("Part 1: {}", max);
 }
 
-fn part_2(){
+fn part_2() {
     let file = File::open("data/input.txt").unwrap();
     let reader = BufReader::new(file);
 
