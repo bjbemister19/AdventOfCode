@@ -63,7 +63,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let start_of_message =
         detect_start_of_message(&input_message).ok_or("could not find start of message")?;
-    println!("Packet detected at {}", start_of_message);
+    println!("Message detected at {}", start_of_message);
 
     Ok(())
 }
