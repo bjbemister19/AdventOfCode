@@ -12,13 +12,11 @@ fn contains_duplicates(header: &VecDeque<char>) -> bool {
     false
 }
 
-fn detect_non_repeating_pattern(input_message: &str, pattern_size: usize) -> Option<usize> {
-    if pattern_size <= 3 || input_message.len() <= pattern_size {
-        return None;
-    }
-
-    let mut pattern_buffer: VecDeque<char> = VecDeque::with_capacity(pattern_size);
-
+fn prefill_pattern_buffer(
+    input_message: &str,
+    pattern_buffer: &mut VecDeque<char>,
+    pattern_size: usize,
+) {
     // Dummy value, gets popped at the beginning of main loop, did this to avoid extra if statement
     pattern_buffer.push_back('a');
     for (i, c) in input_message.chars().enumerate() {
@@ -27,6 +25,15 @@ fn detect_non_repeating_pattern(input_message: &str, pattern_size: usize) -> Opt
             break;
         }
     }
+}
+
+fn detect_non_repeating_pattern(input_message: &str, pattern_size: usize) -> Option<usize> {
+    if pattern_size <= 3 || input_message.len() <= pattern_size {
+        return None;
+    }
+
+    let mut pattern_buffer: VecDeque<char> = VecDeque::with_capacity(pattern_size);
+    prefill_pattern_buffer(input_message, &mut pattern_buffer, pattern_size);
 
     for (i, c) in input_message.chars().skip(pattern_size - 1).enumerate() {
         pattern_buffer.pop_front();
